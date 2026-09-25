@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نادي | لياقة بدنية وقوة</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff5e00'><path d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/></svg>">
+    
+    <!-- Google Fonts: Cairo (Heavy for headlines, Regular for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #161616;
+            --accent-orange: #ff5e00;
+            --accent-hover: #ff7626;
+            --text-light: #ffffff;
+            --text-muted: #999999;
+            --border-color: #2a2a2a;
+            
+            --font-main: 'Cairo', sans-serif;
+            --trans-fast: 0.2s ease-out; /* Fast, punchy transition */
+        }
+
+        /* Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-light);
+            background-color: var(--bg-dark);
+            line-height: 1.7; /* Comfortable Arabic line height */
+            text-align: right;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        button { font-family: var(--font-main); cursor: pointer; border: none; background: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 35px;
+            background-color: var(--accent-orange);
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 800;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: all var(--trans-fast);
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(255, 94, 0, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-orange);
+            border: 2px solid var(--accent-orange);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent-orange);
+            color: #ffffff;
+        }
+
+        /* Nav */
+        nav {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-light);
+            transition: color var(--trans-fast);
+        }
+        
+        .nav-links a:hover { color: var(--accent-orange); }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.4) 60%, transparent 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 span { color: var(--accent-orange); }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #dddddd;
+            margin-bottom: 40px;
+        }
+
+        /* Stats Strip */
+        .stats {
+            background-color: var(--accent-orange);
+            color: #000000;
+            padding: 40px 0;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* Section Global */
+        section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 15px; color: #ffffff; }
+        .section-header h2 span { color: var(--accent-orange); }
+        .section-header p { color: var(--text-muted); font-size: 1.15rem; max-width: 600px; margin: 0 auto; }
+
+        /* Pricing / Memberships */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: center;
+        }
+
+        .price-card {
+            background-color: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform var(--trans-fast), border-color var(--trans-fast);
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-orange);
+        }
+
+        .price-card.featured {
+            background-color: #1a1a1a;
+            border-color: var(--accent-orange);
+            transform: scale(1.05);
+            position: relative;
+            box-shadow: 0 10px 40px rgba(255, 94, 0, 0.15);
+        }
+        
+        .price-card.featured:hover { transform: scale(1.05) translateY(-5px); }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%); /* Logical left in LTR, visual center */
+            background-color: var(--accent-orange);
+            color: #000;
+            font-weight: 900;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .plan-name { font-size: 1.5rem; margin-bottom: 15px; }
+        .plan-price { font-size: 3rem; font-weight: 900; color: var(--accent-orange); margin-bottom: 30px; }
+        .plan-price span { font-size: 1.2rem; color: var(--text-muted); font-weight: 600; }
+
+        .plan-features { text-align: right; margin-bottom: 40px; }
+        .plan-features li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .plan-features li::before {
+            content: '✔';
+            color: var(--accent-orange);
+            font-weight: 900;
+        }
+
+        .price-card .btn { width: 100%; }
+
+        /* Schedule Tabs */
+        .schedule { background-color: var(--bg-card); }
+        .day-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .day-btn {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 4px;
+            transition: all var(--trans-fast);
+        }
+        
+        .day-btn:hover, .day-btn.active {
+            background-color: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: #000;
+        }
+
+        .schedule-content { display: none; animation: fadeIn 0.3s; }
+        .schedule-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .class-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            background-color: var(--bg-dark);
+            padding: 25px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            align-items: center;
+            border-right: 4px solid var(--accent-orange);
+            transition: transform var(--trans-fast);
+        }
+        
+        .class-row:hover { transform: translateX(-5px); /* Move left in RTL */ }
+
+        .class-time { font-size: 1.4rem; font-weight: 900; color: var(--accent-orange); }
+        .class-name { font-size: 1.5rem; font-weight: 800; }
+        .class-trainer { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; text-align: left; }
+
+        /* Trainers */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .trainer-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+        }
+
+        .trainer-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform var(--trans-fast);
+        }
+
+        .trainer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(255, 94, 0, 0.4) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            opacity: 0;
+            transition: opacity var(--trans-fast);
+        }
+
+        .trainer-card:hover img { transform: scale(1.1); }
+        .trainer-card:hover .trainer-overlay { opacity: 1; }
+
+        .trainer-name { font-size: 1.5rem; margin-bottom: 5px; color: #fff; }
+        .trainer-spec { color: var(--accent-orange); font-weight: 800; font-size: 1.1rem; }
+        
+        /* Social icons placeholder inside overlay */
+        .trainer-socials { display: flex; gap: 10px; margin-top: 15px; }
+        .trainer-socials span {
+            width: 35px; height: 35px; background: rgba(255,255,255,0.2);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            transition: background var(--trans-fast);
+        }
+        .trainer-socials span:hover { background: var(--accent-orange); }
+
+        /* Transformations (Before/After) */
+        .transform-section { background-color: var(--bg-card); }
+        .transform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .transform-card {
+            display: flex;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .transform-half {
+            flex: 1;
+            position: relative;
+            aspect-ratio: 3/4;
+        }
+        .transform-half img { width: 100%; height: 100%; object-fit: cover; }
+        .transform-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 4px 12px;
+            font-weight: 800;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .transform-half.after .transform-label { background: var(--accent-orange); color: #000; }
+
+        /* Testimonials */
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .test-card {
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 8px;
+            border-top: 4px solid var(--accent-orange);
+        }
+        .stars { color: var(--accent-orange); font-size: 1.4rem; margin-bottom: 20px; }
+        .test-card p { font-size: 1.15rem; font-weight: 600; margin-bottom: 25px; line-height: 1.8; }
+        .test-author { font-size: 1.2rem; font-weight: 900; color: #fff; }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            padding: 120px 0;
+            text-align: center;
+        }
+        .final-cta h2 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,1); }
+        .final-cta p { font-size: 1.3rem; margin-bottom: 40px; font-weight: 600; }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        .footer-logo { font-size: 2.5rem; margin-bottom: 20px; color: #fff; }
+        .footer-logo span { color: var(--accent-orange); }
+        .footer-about { color: var(--text-muted); max-width: 350px; }
+        
+        .footer-title { font-size: 1.3rem; margin-bottom: 25px; color: #fff; }
+        .footer-links li { margin-bottom: 15px; font-size: 1.1rem; color: var(--text-muted); font-weight: 600; }
+        .footer-links li span { color: var(--accent-orange); font-weight: 900; margin-left: 10px; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .pricing-grid, .transform-grid, .test-grid { grid-template-columns: 1fr; gap: 40px; }
+            .price-card.featured { transform: scale(1); }
+            .price-card.featured:hover { transform: translateY(-5px); }
+            .trainers-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-about { margin: 0 auto; }
+            .nav-links { display: none; }
+            .hero { min-height: 70vh; text-align: center; }
+            .hero-content { margin: 0 auto; }
+            .hero::before { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 100%); }
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .class-row { grid-template-columns: 1fr; text-align: center; gap: 10px; }
+            .class-trainer { text-align: center; }
+            .trainers-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="logo">نا<span>دي</span></a>
+            <div class="nav-links">
+                <a href="#">الرئيسية</a>
+                <a href="#pricing">الاشتراكات</a>
+                <a href="#schedule">الجدول</a>
+                <a href="#trainers">المدربين</a>
+            </div>
+            <a href="#pricing" class="btn">اشترك الآن</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>لا تتنازل عن <span>أهدافك</span></h1>
+            <p>انضم إلى أقوى مجتمع رياضي. معدات احترافية، مدربون معتمدون، وبيئة تدفعك لتخطي حدودك كل يوم.</p>
+            <a href="#contact" class="btn">احصل على تجربة مجانية</a>
+        </div>
+    </header>
+
+    <!-- Stats Strip -->
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h3><span class="counter" data-target="5000">0</span>+</h3>
+                <p>عضو نشط</p>
+            </div>
+            <div class="stat-item">
+                <h3><span class="counter" data-target="50">0</span>+</h3>
+                <p>مدرب معتمد</p>
+            </div>
+            <div class="stat-item">
+                <h3><span class="counter" data-target="100">0</span>+</h3>
+                <p>حصة أسبوعياً</p>
+            </div>
+            <div class="stat-item">
+                <h3><span class="counter" data-target="10">0</span></h3>
+                <p>سنوات خبرة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="container">
+        <div class="section-header">
+            <h2>باقات <span>الاشتراك</span></h2>
+            <p>اختر الباقة التي تناسب أهدافك والتزامك. لا توجد رسوم خفية أو عقود ملزمة.</p>
+        </div>
+        
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3 class="plan-name">اشتراك شهري</h3>
+                <div class="plan-price">350 <span>ر.س / شهر</span></div>
+                <ul class="plan-features">
+                    <li>دخول مفتوح للصالة الرياضية</li>
+                    <li>استخدام أجهزة الكارديو والأوزان</li>
+                    <li>دخول غرفة الساونا</li>
+                </ul>
+                <button class="btn btn-outline">اشترك الآن</button>
+            </div>
+            
+            <div class="price-card featured">
+                <div class="badge">الأكثر طلبًا</div>
+                <h3 class="plan-name">اشتراك ربع سنوي</h3>
+                <div class="plan-price">900 <span>ر.س / 3 أشهر</span></div>
+                <ul class="plan-features">
+                    <li>جميع ميزات الاشتراك الشهري</li>
+                    <li>دخول غير محدود لحصص الكروس فيت</li>
+                    <li>استشارة غذائية مجانية</li>
+                    <li>قياس نسبة الدهون شهرياً</li>
+                </ul>
+                <button class="btn">اشترك الآن</button>
+            </div>
+            
+            <div class="price-card">
+                <h3 class="plan-name">اشتراك سنوي</h3>
+                <div class="plan-price">3200 <span>ر.س / سنة</span></div>
+                <ul class="plan-features">
+                    <li>جميع ميزات الاشتراك الربع سنوي</li>
+                    <li>دعوتين مجانيتين لأصدقائك شهرياً</li>
+                    <li>خزانة خاصة طول فترة الاشتراك</li>
+                    <li>إيقاف الاشتراك لمدة تصل لـ 30 يوم</li>
+                </ul>
+                <button class="btn btn-outline">اشترك الآن</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule -->
+    <section id="schedule" class="schedule">
+        <div class="container">
+            <div class="section-header">
+                <h2>جدول <span>الحصص</span></h2>
+                <p>اكتشف تنوع حصصنا التدريبية وانضم إلى الفصول التي تناسب وقتك ولياقتك.</p>
+            </div>
+            
+            <div class="day-tabs">
+                <button class="day-btn active" data-target="saturday">السبت</button>
+                <button class="day-btn" data-target="sunday">الأحد</button>
+                <button class="day-btn" data-target="monday">الاثنين</button>
+                <button class="day-btn" data-target="tuesday">الثلاثاء</button>
+                <button class="day-btn" data-target="wednesday">الأربعاء</button>
+                <button class="day-btn" data-target="thursday">الخميس</button>
+            </div>
+            
+            <!-- Saturday -->
+            <div class="schedule-content active" id="saturday">
+                <div class="class-row">
+                    <div class="class-time">04:00 PM</div>
+                    <div class="class-name">HIIT حرق الدهون</div>
+                    <div class="class-trainer">المدرب: خالد عبد الرحمن</div>
+                </div>
+                <div class="class-row">
+                    <div class="class-time">06:00 PM</div>
+                    <div class="class-name">رفع الأثقال المتقدم</div>
+                    <div class="class-trainer">المدرب: فهد الدوسري</div>
+                </div>
+                <div class="class-row">
+                    <div class="class-time">08:00 PM</div>
+                    <div class="class-name">ملاكمة / فنون قتالية</div>
+                    <div class="class-trainer">المدرب: عمر حسن</div>
+                </div>
+            </div>
+
+            <!-- Sunday -->
+            <div class="schedule-content" id="sunday">
+                <div class="class-row">
+                    <div class="class-time">05:00 PM</div>
+                    <div class="class-name">كروس فيت أساسيات</div>
+                    <div class="class-trainer">المدرب: طارق اليوسف</div>
+                </div>
+                <div class="class-row">
+                    <div class="class-time">07:00 PM</div>
+                    <div class="class-name">بناء العضلات Core</div>
+                    <div class="class-trainer">المدرب: خالد عبد الرحمن</div>
+                </div>
+            </div>
+            
+            <!-- Other days hidden for brevity, pointing logic applies to all -->
+            <div class="schedule-content" id="monday"><div class="class-row"><div class="class-time">06:00 PM</div><div class="class-name">تمارين المقاومة الشاملة</div><div class="class-trainer">المدرب: فهد الدوسري</div></div></div>
+            <div class="schedule-content" id="tuesday"><div class="class-row"><div class="class-time">07:00 PM</div><div class="class-name">HIIT حرق الدهون</div><div class="class-trainer">المدرب: خالد عبد الرحمن</div></div></div>
+            <div class="schedule-content" id="wednesday"><div class="class-row"><div class="class-time">08:00 PM</div><div class="class-name">ملاكمة ولياقة</div><div class="class-trainer">المدرب: عمر حسن</div></div></div>
+            <div class="schedule-content" id="thursday"><div class="class-row"><div class="class-time">05:00 PM</div><div class="class-name">كروس فيت متقدم</div><div class="class-trainer">المدرب: طارق اليوسف</div></div></div>
+        </div>
+    </section>
+
+    <!-- Trainers -->
+    <section id="trainers" class="container">
+        <div class="section-header">
+            <h2>فريق <span>المدربين</span></h2>
+            <p>نخبة من أفضل المدربين المعتمدين لمساعدتك على تحقيق أهدافك بطريقة علمية وآمنة.</p>
+        </div>
+        
+        <div class="trainers-grid">
+            <div class="trainer-card">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=80" alt="Trainer">
+                <div class="trainer-overlay">
+                    <h3 class="trainer-name">خالد عبد الرحمن</h3>
+                    <div class="trainer-spec">مدرب لياقة بدنية</div>
+                    <div class="trainer-socials">
+                        <span>IN</span><span>TW</span>
+                    </div>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=600&q=80" alt="Trainer">
+                <div class="trainer-overlay">
+                    <h3 class="trainer-name">فهد الدوسري</h3>
+                    <div class="trainer-spec">مدرب رفع أثقال</div>
+                    <div class="trainer-socials">
+                        <span>IN</span><span>TW</span>
+                    </div>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=600&q=80" alt="Trainer">
+                <div class="trainer-overlay">
+                    <h3 class="trainer-name">عمر حسن</h3>
+                    <div class="trainer-spec">مدرب ملاكمة</div>
+                    <div class="trainer-socials">
+                        <span>IN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80" alt="Trainer">
+                <div class="trainer-overlay">
+                    <h3 class="trainer-name">طارق اليوسف</h3>
+                    <div class="trainer-spec">مدرب كروس فيت</div>
+                    <div class="trainer-socials">
+                        <span>IN</span><span>FB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformations -->
+    <section class="transform-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>قصص <span>نجاح</span></h2>
+                <p>بالتزامهم وتوجيه مدربينا، استطاعوا تغيير حياتهم وأجسادهم للأفضل.</p>
+            </div>
+            
+            <div class="transform-grid">
+                <!-- Example 1 -->
+                <div class="transform-card">
+                    <div class="transform-half before">
+                        <img src="https://images.unsplash.com/photo-1599058917212-97d14ad43ce4?auto=format&fit=crop&w=400&q=80" alt="Before">
+                        <div class="transform-label">قبل (102 كجم)</div>
+                    </div>
+                    <div class="transform-half after">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=400&q=80" alt="After">
+                        <div class="transform-label">بعد (80 كجم)</div>
+                    </div>
+                </div>
+                <!-- Example 2 -->
+                <div class="transform-card">
+                    <div class="transform-half before">
+                        <img src="https://images.unsplash.com/photo-1526506190300-34907936a575?auto=format&fit=crop&w=400&q=80" alt="Before">
+                        <div class="transform-label">قبل (نحافة)</div>
+                    </div>
+                    <div class="transform-half after">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80" alt="After">
+                        <div class="transform-label">بعد (+12 كجم عضل)</div>
+                    </div>
+                </div>
+                <!-- Example 3 -->
+                <div class="transform-card">
+                    <div class="transform-half before">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=400&q=80" alt="Before">
+                        <div class="transform-label">قبل (75 كجم)</div>
+                    </div>
+                    <div class="transform-half after">
+                        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=400&q=80" alt="After">
+                        <div class="transform-label">بعد (تنشيف كامل)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="container">
+        <div class="section-header">
+            <h2>رأي <span>الأعضاء</span></h2>
+        </div>
+        
+        <div class="test-grid">
+            <div class="test-card">
+                <div class="stars">★★★★★</div>
+                <p>"أفضل نادي اشتركت فيه على الإطلاق. الأجهزة دائماً نظيفة والمدربون متعاونون لأبعد حد ولا يبخلون بالمعلومة."</p>
+                <div class="test-author">أحمد الصالح</div>
+            </div>
+            <div class="test-card">
+                <div class="stars">★★★★★</div>
+                <p>"حصص الكروس فيت هنا غيرت مفهومي للرياضة. طاقة المدربين عالية جداً والبيئة تنافسية ومحفزة جداً للاستمرار."</p>
+                <div class="test-author">سلطان المري</div>
+            </div>
+            <div class="test-card">
+                <div class="stars">★★★★★</div>
+                <p>"خلال 6 أشهر حققت نتائج ما كنت أحلم فيها. المتابعة الغذائية مع الاشتراك الربع سنوي فرقت معي كثير في نزول الوزن."</p>
+                <div class="test-author">ياسر عبد الكريم</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>جاهز تبدأ رحلتك؟</h2>
+            <p>انضم اليوم واحصل على تقييم لياقة بدنية مجاني.</p>
+            <a href="#pricing" class="btn">اشترك الآن وانطلق</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">نا<span>دي</span></div>
+                <p class="footer-about">نادي رياضي متكامل مصمم لصناعة الأبطال. نوفر أحدث المعدات الرياضية وبيئة تدريبية استثنائية لدفعك نحو أهدافك.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">أوقات العمل</h4>
+                <ul class="footer-links">
+                    <li>الأحد - الخميس: <span>05:00 ص - 12:00 م</span></li>
+                    <li>الجمعة: <span>02:00 م - 10:00 م</span></li>
+                    <li>السبت: <span>08:00 ص - 10:00 م</span></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">تواصل معنا</h4>
+                <ul class="footer-links">
+                    <li>العنوان: <span>طريق الملك فهد، الرياض</span></li>
+                    <li>الهاتف: <span>050 123 4567</span></li>
+                    <li>البريد: <span>info@nadi.com</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 نادي للياقة البدنية. جميع الحقوق محفوظة.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Schedule Tabs Logic
+        const dayBtns = document.querySelectorAll('.day-btn');
+        const schedules = document.querySelectorAll('.schedule-content');
+
+        dayBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active classes
+                dayBtns.forEach(b => b.classList.remove('active'));
+                schedules.forEach(s => s.classList.remove('active'));
+                
+                // Add active to clicked button and target schedule
+                btn.classList.add('active');
+                const targetId = btn.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // 2. Animated Counters (Intersection Observer)
+        const counters = document.querySelectorAll('.counter');
+        const counterOptions = { threshold: 0.5 };
+        
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, counterOptions);
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const startTime = performance.now();
+            
+            function update(time) {
+                const elapsed = time - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Ease out quad
+                const ease = progress * (2 - progress); 
+                const current = Math.floor(ease * target);
+                
+                el.innerText = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.innerText = target;
+                }
+            }
+            requestAnimationFrame(update);
+        }
+    </script>
+</body>
+</html>
